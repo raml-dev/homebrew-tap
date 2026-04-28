@@ -1,0 +1,23 @@
+# Copyright 2026-present raml-dev
+# SPDX-License-Identifier: AGPL-3.0-only
+
+[tools]
+jq = "1.8.1"
+
+[tasks."repo:brew:publish-release"]
+description = "Ingest a stable package release and update the Homebrew cask"
+run = "bash {{ config_root }}/scripts/publish-cask-release.sh"
+
+[tasks."local-publish-test"]
+description = "Render the Homebrew cask from a locally served release fixture"
+run = """
+export CASK_NAME="$(jq -r '.client_payload.cask.name' "$HOMEBREW_TAP_DISPATCH_JSON")"
+export HOMEBREW_SOURCE_REPOSITORY="$(jq -r '.client_payload.cask.source_repository' "$HOMEBREW_TAP_DISPATCH_JSON")"
+export PACKAGE_RELEASE_VERSION="$(jq -r '.client_payload.release.version' "$HOMEBREW_TAP_DISPATCH_JSON")"
+export PACKAGE_RELEASE_API_URL="$(jq -r '.client_payload.release.api_url' "$HOMEBREW_TAP_DISPATCH_JSON")"
+export PACKAGE_RELEASE_URL="$(jq -r '.client_payload.release.html_url' "$HOMEBREW_TAP_DISPATCH_JSON")"
+export PACKAGE_APP_NAME="$(jq -r '.client_payload.cask.app_name' "$HOMEBREW_TAP_DISPATCH_JSON")"
+export PACKAGE_APP_DESCRIPTION="$(jq -r '.client_payload.cask.description' "$HOMEBREW_TAP_DISPATCH_JSON")"
+export PACKAGE_APP_LICENSE="$(jq -r '.client_payload.cask.license' "$HOMEBREW_TAP_DISPATCH_JSON")"
+mise run repo:brew:publish-release
+"""
