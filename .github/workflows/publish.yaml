@@ -34,6 +34,7 @@ jobs:
       - name: Commit cask update
         shell: bash
         run: |
+          git add "Casks/${CASK_NAME}.rb"
           if git diff --quiet -- "Casks/${CASK_NAME}.rb"; then
             echo "No cask changes to commit"
             exit 0
