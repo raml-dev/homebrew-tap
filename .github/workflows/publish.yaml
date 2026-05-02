@@ -35,13 +35,11 @@ jobs:
         shell: bash
         run: |
           git add "Casks/${CASK_NAME}.rb"
-          if git diff --quiet -- "Casks/${CASK_NAME}.rb"; then
+          if git diff --cached --quiet -- "Casks/${CASK_NAME}.rb"; then
             echo "No cask changes to commit"
             exit 0
           fi
-
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add "Casks/${CASK_NAME}.rb"
           git commit -m "Update Homebrew cask for ${CASK_NAME} ${PACKAGE_RELEASE_VERSION}"
           git push
