@@ -4,10 +4,6 @@
 name: Homebrew Cask Release
 
 on:
-  workflow_dispatch:
-    inputs:
-      CASK_NAME:
-        default: "solo"
   repository_dispatch:
     types:
       - homebrew-cask-release
