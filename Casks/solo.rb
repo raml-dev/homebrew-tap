@@ -2,8 +2,8 @@ cask "solo" do
   arch arm: "arm64", intel: "amd64"
 
   version "0.1.0"
-  sha256 arm:   "d1bf80b2149bfcf6af50dbff7898fe3903a00c9145f8ef7d05fa127cad3122ea",
-         intel: "336198a1bfbf163e879aad5dd6f08cbc56bb803da6980c5d2706a26b3d61d2e4"
+  sha256 arm:   "656b50585e5ae6e4a1f0198e8e05c4a9ae21fac9d883e816193b4fad4ef74d54",
+         intel: "af210865fb4b1e6e28069eed248ddf9465ba72ab98d205b3b31884fa09a60cc9"
 
   url "https://github.com/raml-dev/solo/releases/download/#{version}/solo-darwin-#{arch}.dmg",
       verified: "github.com/raml-dev/solo/releases/download/"
